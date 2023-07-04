@@ -1,0 +1,37 @@
+<xs:schema elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:types="C:\Users\Сережа\IdeaProjects\ParseXMLToJSON\src\main\resources\xsd-schema\types.xsd">
+    <xs:import namespace="C:\Users\Сережа\IdeaProjects\ParseXMLToJSON\src\main\resources\xsd-schema\types.xsd" schemaLocation="types.xsd"/>
+    <xs:element name="users">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="user" maxOccurs="unbounded">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element type="xs:string" name="firstName"/>
+                            <xs:element type="xs:string" name="lastName"/>
+                            <xs:element type="xs:string" name="middleName" minOccurs="0"/>
+                            <xs:element type="types:nullableLong" name="inn" minOccurs="0"/>
+                            <xs:element type="types:nullableLong" name="snils" minOccurs="0"/>
+                            <xs:element type="xs:date" name="birthday" minOccurs="0"/>
+                            <xs:element type="xs:string" name="login" minOccurs="0"/>
+                            <xs:element type="xs:string" name="email"/>
+                            <xs:element name="organizations">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="organization" maxOccurs="unbounded">
+                                            <xs:complexType>
+                                                <xs:sequence>
+                                                    <xs:element type="types:nullableLong" name="inn"/>
+                                                    <xs:element type="xs:string" name="kpp" minOccurs="0"/>
+                                                </xs:sequence>
+                                            </xs:complexType>
+                                        </xs:element>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>
