@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<users xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="file://xsd-schema/users.xsd">
+    <user>
+        <firstName>Иван</firstName>
+        <lastName>Ургант</lastName>
+        <middleName>Андреевич</middleName>
+        <inn>
+
+            909362680728
+
+        </inn>
+        <snils>64170687400</snils>
+        <birthday>2020-01-02</birthday>
+        <login>Login</login>
+        <email>Email@test.ru</email>
+        <organizations>
+            <organization>
+                <inn>9103602758</inn>
+                <kpp>441244206</kpp>
+            </organization>
+            <organization>
+                <inn>4626173053</inn>
+            </organization>
+        </organizations>
+    </user>
+    <user>
+        <firstName>Господин</firstName>
+        <lastName>Никто</lastName>
+        <email>Email@test2.ru</email>
+        <organizations>
+            <organization>
+                <inn>9103602758</inn>
+                <kpp>441244206</kpp>
+            </organization>
+        </organizations>
+    </user>
+</users>

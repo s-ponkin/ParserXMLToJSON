@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<users xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="file://xsd-schema/user_profiles.xsd">
+    <user>
+        <uuid>0052f40b-e12f-4fcb-ac23-988c2b4f539b</uuid>
+        <userProfiles>
+            <userProfile>
+                <organizationInn>3557421744</organizationInn>
+                <organizationKpp>043401207</organizationKpp>
+                <workEmail>email.from.file@work.com</workEmail>
+                <departmentName>Отдел</departmentName>
+                <positionName>Должность</positionName>
+            </userProfile>
+            <userProfile>
+                <organizationInn>4626173053</organizationInn>
+                <organizationKpp>647074188</organizationKpp>
+                <workEmail>email@work.com</workEmail>
+            </userProfile>
+        </userProfiles>
+    </user>
+    <user>
+        <uuid>1152f40b-e12f-4fcb-ac23-988c2b4f539b</uuid>
+        <userProfiles>
+            <userProfile>
+                <organizationInn>3557421744000</organizationInn>
+                <organizationKpp>04340120</organizationKpp>
+                <workEmail>other.email@work.com</workEmail>
+            </userProfile>
+        </userProfiles>
+    </user>
+</users>

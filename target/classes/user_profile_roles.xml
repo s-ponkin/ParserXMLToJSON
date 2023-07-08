@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<userProfiles xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:noNamespaceSchemaLocation="file://xsd-schema/user_profile_roles.xsd">
+    <userProfile>
+        <uuid>009e6b17-8974-484f-b0bb-b413c0d5ca20</uuid>
+        <infoSystems>
+            <infoSystem>
+                <techName>not_xidbox</techName>
+                <rolesToAdd>
+                    <role>
+                        <techName>information_system_manager </techName>
+                        <startDate>2023-01-01T09:30:10Z</startDate>
+                        <endDate>2023-12-01T10:31:09Z</endDate>
+                        <controlledInfoSystemTechName>xidbox</controlledInfoSystemTechName>
+                    </role>
+                </rolesToAdd>
+                <rolesToDelete>
+                    <role>
+                        <techName>
+                            system_administrator
+                        </techName>
+                    </role>
+                </rolesToDelete>
+            </infoSystem>
+        </infoSystems>
+    </userProfile>
+	<userProfile>
+        <uuid>a41ec547-c9e0-447b-bf72-e9e2f570741f</uuid>
+        <infoSystems>
+            <infoSystem>
+                <techName>xidbox_external_is</techName>
+                <rolesToAdd>
+                    <role>
+                        <techName>account_manager </techName>
+                        <startDate>2021-01-01T09:30:10Z</startDate>
+                    </role>
+                </rolesToAdd>
+                <rolesToDelete>
+                    <role>
+                        <techName>
+                            system_administrator
+                        </techName>
+                    </role>
+                </rolesToDelete>
+            </infoSystem>
+        </infoSystems>
+    </userProfile>
+</userProfiles>

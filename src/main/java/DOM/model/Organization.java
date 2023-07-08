@@ -1,15 +1,15 @@
-package model;
+package DOM.model;
 
 public class Organization {
 
-    private long inn;
+    private String inn;
     private String kpp;
 
-    public long getInn() {
+    public String getInn() {
         return inn;
     }
 
-    public void setInn(long inn) {
+    public void setInn(String inn) {
         this.inn = inn;
     }
 

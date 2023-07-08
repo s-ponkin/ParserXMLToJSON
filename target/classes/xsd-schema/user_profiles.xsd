@@ -1,0 +1,33 @@
+<xs:schema elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:types="types">
+    <xs:import namespace="types" schemaLocation="types.xsd"/>
+    <xs:element name="users">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="user" maxOccurs="unbounded">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element type="types:uuid" name="uuid"/>
+                            <xs:element name="userProfiles">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="userProfile" maxOccurs="unbounded">
+                                            <xs:complexType>
+                                                <xs:sequence>
+                                                    <xs:element type="types:nullableLong" name="organizationInn"/>
+                                                    <xs:element type="xs:string" name="organizationKpp" minOccurs="0"/>
+                                                    <xs:element type="xs:string" name="workEmail"/>
+                                                    <xs:element type="xs:string" name="departmentName" minOccurs="0"/>
+                                                    <xs:element type="xs:string" name="positionName" minOccurs="0"/>
+                                                </xs:sequence>
+                                            </xs:complexType>
+                                        </xs:element>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

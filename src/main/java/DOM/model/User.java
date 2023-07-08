@@ -1,7 +1,5 @@
-package model;
+package DOM.model;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -10,8 +8,8 @@ public class User {
     private String firstName;
     private String lastName;
     private String middleName;
-    private long inn;
-    private long snils;
+    private String inn;
+    private String snils;
     private Date birthday;
     private String login;
     private String email;
@@ -41,19 +39,19 @@ public class User {
         this.middleName = middleName;
     }
 
-    public long getInn() {
+    public String getInn() {
         return inn;
     }
 
-    public void setInn(long inn) {
+    public void setInn(String inn) {
         this.inn = inn;
     }
 
-    public long getSnils() {
+    public String getSnils() {
         return snils;
     }
 
-    public void setSnils(long snils) {
+    public void setSnils(String snils) {
         this.snils = snils;
     }
 
