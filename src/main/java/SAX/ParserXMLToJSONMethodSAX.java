@@ -122,8 +122,6 @@ public class ParserXMLToJSONMethodSAX {
             file.createNewFile();
             FileWriter fileWriter = new FileWriter(file);
             String result = JSONObjectUsers.toJSONString();
-            result = StringUtils.removeStart(result, "{");
-            result = StringUtils.removeEnd(result, "}");
             fileWriter.write(result);
             fileWriter.flush();
             fileWriter.close();

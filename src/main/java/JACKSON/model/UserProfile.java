@@ -1,9 +1,13 @@
 package JACKSON.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -13,7 +17,7 @@ public final class UserProfile {
     private String uuid;
     @JsonInclude(JsonInclude.Include.NON_NULL)
     @JacksonXmlProperty(localName = "infoSystems")
-    private InfoSystems infoSystems;
+    private List<InfoSystem> infoSystems = new ArrayList<>();
 
     UserProfile() {
         super();
@@ -23,11 +27,4 @@ public final class UserProfile {
         this.uuid = uuid.trim();
     }
 
-    @Override
-    public String toString() {
-        return "UserProfile{" +
-                "uuid='" + uuid + '\'' +
-                ", infoSystems=" + infoSystems +
-                '}';
-    }
 }

@@ -19,7 +19,7 @@ public final class UserProfiles {
     @JsonInclude(JsonInclude.Include.NON_NULL)
     @JacksonXmlProperty(localName = "userProfile")
     @JacksonXmlElementWrapper(useWrapping = false)
-    private List<UserProfile> userProfileList = new ArrayList<>();
+    private List<UserProfile> userProfiles = new ArrayList<>();
 
     public UserProfiles() {
         super();
@@ -28,7 +28,7 @@ public final class UserProfiles {
     @Override
     public String toString() {
         return "UserProfiles{" +
-                "userProfileList=" + userProfileList +
+                "userProfileList=" + userProfiles +
                 '}';
     }
 }

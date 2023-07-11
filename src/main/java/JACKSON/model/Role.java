@@ -9,7 +9,7 @@ public class Role {
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
     @JacksonXmlProperty(localName = "techName")
-    private String techName;
+    private String roleTechName;
     @JsonInclude(JsonInclude.Include.NON_NULL)
     @JacksonXmlProperty(localName = "startDate")
     private String startDate;
@@ -25,7 +25,7 @@ public class Role {
     }
 
     public void setTechName(String techName) {
-        this.techName = techName.trim();
+        this.roleTechName = techName.trim();
     }
 
     public void setStartDate(String startDate) {
@@ -43,7 +43,7 @@ public class Role {
     @Override
     public String toString() {
         return "Role{" +
-                "techName='" + techName + '\'' +
+                "techName='" + roleTechName + '\'' +
                 ", startDate='" + startDate + '\'' +
                 ", endDate='" + endDate + '\'' +
                 ", controlledInfoSystemTechName='" + controlledInfoSystemTechName + '\'' +

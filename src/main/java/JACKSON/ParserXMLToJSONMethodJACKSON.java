@@ -1,7 +1,10 @@
 package JACKSON;
 
 import JACKSON.model.UserProfiles;
+import com.fasterxml.jackson.core.util.DefaultIndenter;
+import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import org.apache.commons.lang3.StringUtils;
 
@@ -40,8 +43,11 @@ public class ParserXMLToJSONMethodJACKSON {
                     StringUtils.toEncodedString(Files.readAllBytes(Paths.get(inputPath)), StandardCharsets.UTF_8
                     ), UserProfiles.class);
 
-            ObjectMapper objectMapperJson = new ObjectMapper();
-            jsonObject = objectMapperJson.writeValueAsString(userProfiles);
+            DefaultPrettyPrinter defaultPrettyPrinter = new DefaultPrettyPrinter();
+            defaultPrettyPrinter.indentArraysWith(new DefaultIndenter());
+            ObjectWriter objectWriter = new ObjectMapper().writer().with(defaultPrettyPrinter);
+            jsonObject = objectWriter.writeValueAsString(userProfiles);
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -54,8 +60,6 @@ public class ParserXMLToJSONMethodJACKSON {
         try {
             file.createNewFile();
             FileWriter fileWriter = new FileWriter(file);
-            jsonObject = StringUtils.removeStart(jsonObject, "{");
-            jsonObject = StringUtils.removeEnd(jsonObject, "}");
             fileWriter.write(jsonObject);
             fileWriter.flush();
             fileWriter.close();
