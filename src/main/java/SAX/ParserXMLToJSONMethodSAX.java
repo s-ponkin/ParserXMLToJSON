@@ -9,6 +9,11 @@ import org.xml.sax.SAXException;
 
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
+import javax.xml.transform.Source;
+import javax.xml.transform.stream.StreamSource;
+import javax.xml.validation.Schema;
+import javax.xml.validation.SchemaFactory;
+import javax.xml.validation.Validator;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -28,11 +33,15 @@ public class ParserXMLToJSONMethodSAX {
     /**
      * Метод конвертирует файл формата XML в формат JSON методом SAX.
      *
-     * @param inputPath путь к файлу формата XML.
+     * @param inputPath  путь к файлу формата XML.
      * @param outputPath путь к файлу формата JSON.
      */
 
     public static void parseXMLToJSON(String inputPath, String outputPath) {
+
+        if (!checkValidation(inputPath)) {
+            System.out.println("Validity error.");
+        }
 
         Users users = creatingListUsersObjectFromData(inputPath);
         if (users != null) {
@@ -44,11 +53,11 @@ public class ParserXMLToJSONMethodSAX {
 
         SAXParserFactory factory = SAXParserFactory.newDefaultInstance();
         SAXParserHandler handler = new SAXParserHandler();
-        SAXParser parser = null;
+        SAXParser parser;
         try {
             parser = factory.newSAXParser();
         } catch (Exception e) {
-            System.out.println("Open sax parser error " + e.toString());
+            System.out.println("Open sax parser error " + e);
             return null;
         }
 
@@ -56,15 +65,15 @@ public class ParserXMLToJSONMethodSAX {
         try {
             parser.parse(file, handler);
         } catch (SAXException e) {
-            System.out.println("Sax parsing error " + e.toString());
+            System.out.println("Sax parsing error " + e);
         } catch (IOException e) {
-            System.out.println("IO parsing error " + e.toString());
+            System.out.println("IO parsing error " + e);
         }
 
         return handler.getUsers();
     }
 
-    private static void creatingJSONFile(Users users, String path){
+    private static void creatingJSONFile(Users users, String path) {
         JSONObject JSONObjectUsers = new JSONObject();
         JSONArray JSONOArray = new JSONArray();
 
@@ -72,29 +81,29 @@ public class ParserXMLToJSONMethodSAX {
             JSONObject JSONObjectUser = new JSONObject();
             User user = users.getUserList().get(i);
 
-            if(user.getUuid() != null){
+            if (user.getUuid() != null) {
                 JSONObject JSONObjectUserUuid = new JSONObject();
-                JSONObjectUserUuid.put(TAG_UUID,user.getUuid());
+                JSONObjectUserUuid.put(TAG_UUID, user.getUuid());
                 JSONObjectUser.put(TAG_USER, JSONObjectUserUuid);
             }
 
-            if(!user.getUserProfileList().isEmpty()){
+            if (!user.getUserProfileList().isEmpty()) {
                 JSONArray JSONOArrayInfoProfiles = new JSONArray();
                 for (int j = 0; j < user.getUserProfileList().size(); j++) {
                     JSONObject JSONObjectInfoProfile = new JSONObject();
-                    if(user.getUserProfileList().get(j).getOrganizationInn() != null){
+                    if (user.getUserProfileList().get(j).getOrganizationInn() != null) {
                         JSONObjectInfoProfile.put(TAG_INN, user.getUserProfileList().get(j).getOrganizationInn());
                     }
-                    if(user.getUserProfileList().get(j).getOrganizationKpp() != null){
+                    if (user.getUserProfileList().get(j).getOrganizationKpp() != null) {
                         JSONObjectInfoProfile.put(TAG_KPP, user.getUserProfileList().get(j).getOrganizationKpp());
                     }
-                    if (user.getUserProfileList().get(j).getWorkEmail() != null){
+                    if (user.getUserProfileList().get(j).getWorkEmail() != null) {
                         JSONObjectInfoProfile.put(TAG_EMAIL, user.getUserProfileList().get(j).getWorkEmail());
                     }
-                    if(user.getUserProfileList().get(j).getDepartmentName() != null){
+                    if (user.getUserProfileList().get(j).getDepartmentName() != null) {
                         JSONObjectInfoProfile.put(TAG_DEPARTMENT_NAME, user.getUserProfileList().get(j).getDepartmentName());
                     }
-                    if(user.getUserProfileList().get(j).getPositionName() != null){
+                    if (user.getUserProfileList().get(j).getPositionName() != null) {
                         JSONObjectInfoProfile.put(TAG_POSITION_NAME, user.getUserProfileList().get(j).getPositionName());
                     }
 
@@ -122,5 +131,20 @@ public class ParserXMLToJSONMethodSAX {
             e.printStackTrace();
         }
 
+    }
+
+    private static boolean checkValidation(String path) {
+        SchemaFactory factory = SchemaFactory.newDefaultInstance();
+        Source schemaFile = new StreamSource(new File("xsd-schema/user_profiles.xsd"));
+        Source schemaFile1 = new StreamSource(new File("xsd-schema/types.xsd"));
+        try {
+            Schema schema = factory.newSchema(new Source[]{schemaFile, schemaFile1});
+            Validator validator = schema.newValidator();
+            validator.validate(new StreamSource(new File(path)));
+            return true;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return false;
+        }
     }
 }

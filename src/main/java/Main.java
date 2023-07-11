@@ -5,9 +5,18 @@ import SAX.ParserXMLToJSONMethodSAX;
 public class Main {
 
     public static void main(String[] args) {
-        ParserXMLToJSONMethodDOM.parseXMLToJSON("users.xml", "DOM/data/users.json");
-        ParserXMLToJSONMethodSAX.parseXMLToJSON("user_profiles.xml", "SAX/data/user_profiles.json");
-//        ParserXMLToJSONMethodJACKSON.parseXMLToJSON("user_profile_roles.xml", "");
 
+        String inputPathDOM = "users.xml";
+        String outputPathDOM = "DOM/data/users.json";
+
+        String inputPathSAX = "user_profiles.xml";
+        String outputPathSAX = "SAX/data/user_profiles.json";
+
+        String inputPathJACKSON = "user_profile_roles.xml";
+        String outputPathJACKSON = "JACKSON/data/user_profile_roles.json";
+
+        ParserXMLToJSONMethodDOM.parseXMLToJSON(inputPathDOM, outputPathDOM);
+        ParserXMLToJSONMethodSAX.parseXMLToJSON(inputPathSAX, outputPathSAX);
+        ParserXMLToJSONMethodJACKSON.parseXMLToJSON(inputPathJACKSON, outputPathJACKSON);
     }
 }

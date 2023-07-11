@@ -1,27 +1,26 @@
 package JACKSON.model;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 public final class UserProfile {
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     @JacksonXmlProperty(localName = "uuid")
     private String uuid;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     @JacksonXmlProperty(localName = "infoSystems")
     private InfoSystems infoSystems;
 
-    public String getUuid() {
-        return uuid;
+    UserProfile() {
+        super();
     }
 
     public void setUuid(String uuid) {
-        this.uuid = uuid;
-    }
-
-    public InfoSystems getInfoSystems() {
-        return infoSystems;
-    }
-
-    public void setInfoSystems(InfoSystems infoSystems) {
-        this.infoSystems = infoSystems;
+        this.uuid = uuid.trim();
     }
 
     @Override

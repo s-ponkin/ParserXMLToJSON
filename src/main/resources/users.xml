@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <users xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:noNamespaceSchemaLocation="file://../../../main/resources/xsd-schema/users.xsd">
+       xsi:noNamespaceSchemaLocation="file://xsd-schema/users.xsd">
     <user>
         <firstName>Иван</firstName>
         <lastName>Ургант</lastName>
         <middleName>Андреевич</middleName>
-        <inn>909362680728</inn>
+        <inn>
+
+            909362680728
+
+        </inn>
         <snils>64170687400</snils>
         <birthday>2020-01-02</birthday>
         <login>Login</login>

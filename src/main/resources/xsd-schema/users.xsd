@@ -1,5 +1,5 @@
-<xs:schema elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:types="C:\Users\Сережа\IdeaProjects\ParseXMLToJSON\src\main\resources\xsd-schema\types.xsd">
-    <xs:import namespace="C:\Users\Сережа\IdeaProjects\ParseXMLToJSON\src\main\resources\xsd-schema\types.xsd" schemaLocation="types.xsd"/>
+<xs:schema elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:types="types">
+    <xs:import namespace="types.xsd" schemaLocation="types.xsd"/>
     <xs:element name="users">
         <xs:complexType>
             <xs:sequence>

@@ -4,7 +4,6 @@ import SAX.model.User;
 import SAX.model.UserProfile;
 import SAX.model.Users;
 import org.xml.sax.Attributes;
-import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
 import java.util.ArrayList;
@@ -30,14 +29,14 @@ public class SAXParserHandler extends DefaultHandler {
     List<UserProfile> usersProfileList;
     private String currentTagName;
 
-    public Users getUsers(){
+    public Users getUsers() {
         return users;
     }
 
     @Override
-    public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
+    public void startElement(String uri, String localName, String qName, Attributes attributes) {
         currentTagName = qName;
-        switch (qName){
+        switch (qName) {
             case TAG_USERS -> usersList = new ArrayList<>();
 
             case TAG_USER -> user = new User();
@@ -51,12 +50,10 @@ public class SAXParserHandler extends DefaultHandler {
     }
 
     @Override
-    public void endElement(String uri, String localName, String qName) throws SAXException {
+    public void endElement(String uri, String localName, String qName) {
 
-        switch (qName){
-            case TAG_USERS -> {
-                users.setUserList(usersList);
-            }
+        switch (qName) {
+            case TAG_USERS -> users.setUserList(usersList);
 
             case TAG_USER -> {
                 usersList.add(user);
@@ -78,21 +75,22 @@ public class SAXParserHandler extends DefaultHandler {
     }
 
     @Override
-    public void characters(char[] ch, int start, int length) throws SAXException {
+    public void characters(char[] ch, int start, int length) {
 
-        if(currentTagName != null){
-            switch (currentTagName){
-                case TAG_UUID -> user.setUuid(new String(ch, start, length));
+        String info = new String(ch, start, length).trim();
+        if (currentTagName != null) {
+            switch (currentTagName) {
+                case TAG_UUID -> user.setUuid(info);
 
-                case TAG_ORGANIZATIONS_INN -> userProfile.setOrganizationInn(new String(ch, start, length));
+                case TAG_ORGANIZATIONS_INN -> userProfile.setOrganizationInn(info);
 
-                case TAG_ORGANIZATIONS_KPP -> userProfile.setOrganizationKpp(new String(ch, start, length));
+                case TAG_ORGANIZATIONS_KPP -> userProfile.setOrganizationKpp(info);
 
-                case TAG_WORK_EMAIL-> userProfile.setWorkEmail(new String(ch, start, length));
+                case TAG_WORK_EMAIL -> userProfile.setWorkEmail(info);
 
-                case TAG_DEPARTMENT_NAME-> userProfile.setDepartmentName(new String(ch, start, length));
+                case TAG_DEPARTMENT_NAME -> userProfile.setDepartmentName(info);
 
-                case TAG_POSITION_NAME-> userProfile.setPositionName(new String(ch, start, length));
+                case TAG_POSITION_NAME -> userProfile.setPositionName(info);
             }
         }
     }

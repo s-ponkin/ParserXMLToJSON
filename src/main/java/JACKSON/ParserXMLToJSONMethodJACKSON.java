@@ -5,6 +5,13 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import org.apache.commons.lang3.StringUtils;
 
+import javax.xml.transform.Source;
+import javax.xml.transform.stream.StreamSource;
+import javax.xml.validation.Schema;
+import javax.xml.validation.SchemaFactory;
+import javax.xml.validation.Validator;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -12,18 +19,63 @@ import java.nio.file.Paths;
 
 public class ParserXMLToJSONMethodJACKSON {
 
-    public static void parseXMLToJSON(String inputPath, String outputPath){
+    /**
+     * Метод конвертирует файл формата XML в формат JSON методом JACKSON.
+     *
+     * @param inputPath  путь к файлу формата XML.
+     * @param outputPath путь к файлу формата JSON.
+     */
+
+    public static void parseXMLToJSON(String inputPath, String outputPath) {
+
+        if (!checkValidation(inputPath)) {
+            System.out.println("Validity error.");
+        }
+
         ObjectMapper objectMapper = new XmlMapper();
-        UserProfiles userProfiles = null;
+        UserProfiles userProfiles;
+        String jsonObject = null;
         try {
             userProfiles = objectMapper.readValue(
                     StringUtils.toEncodedString(Files.readAllBytes(Paths.get(inputPath)), StandardCharsets.UTF_8
                     ), UserProfiles.class);
+
+            ObjectMapper objectMapperJson = new ObjectMapper();
+            jsonObject = objectMapperJson.writeValueAsString(userProfiles);
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        System.out.println(userProfiles);
+        if (jsonObject == null) {
+            return;
+        }
+
+        File file = new File(outputPath);
+        try {
+            file.createNewFile();
+            FileWriter fileWriter = new FileWriter(file);
+            jsonObject = StringUtils.removeStart(jsonObject, "{");
+            jsonObject = StringUtils.removeEnd(jsonObject, "}");
+            fileWriter.write(jsonObject);
+            fileWriter.flush();
+            fileWriter.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
+    private static boolean checkValidation(String path) {
+        SchemaFactory factory = SchemaFactory.newDefaultInstance();
+        Source schemaFile = new StreamSource(new File("xsd-schema/user_profile_roles.xsd"));
+        Source schemaFile1 = new StreamSource(new File("xsd-schema/types.xsd"));
+        try {
+            Schema schema = factory.newSchema(new Source[]{schemaFile, schemaFile1});
+            Validator validator = schema.newValidator();
+            validator.validate(new StreamSource(new File(path)));
+            return true;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return false;
+        }
+    }
 }

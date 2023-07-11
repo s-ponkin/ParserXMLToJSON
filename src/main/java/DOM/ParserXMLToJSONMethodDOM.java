@@ -12,7 +12,6 @@ import org.w3c.dom.NodeList;
 
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.transform.Source;
-import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamSource;
 import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
@@ -44,7 +43,7 @@ public class ParserXMLToJSONMethodDOM {
     /**
      * Метод конвертирует файл формата XML в формат JSON методом DOM.
      *
-     * @param inputPath путь к файлу формата XML.
+     * @param inputPath  путь к файлу формата XML.
      * @param outputPath путь к файлу формата JSON.
      */
 
@@ -57,9 +56,9 @@ public class ParserXMLToJSONMethodDOM {
             return;
         }
 
-//        if (checkValidation(doc)) {
-//            System.out.println("Validity error.");
-//        }
+        if (!checkValidation(inputPath)) {
+            System.out.println("Validity error.");
+        }
 
         Users users = new Users();
         users.setUserList(creatingListUsersObjectFromData(doc));
@@ -67,7 +66,7 @@ public class ParserXMLToJSONMethodDOM {
 
     }
 
-    private static List<User> creatingListUsersObjectFromData(Document document){
+    private static List<User> creatingListUsersObjectFromData(Document document) {
         List<User> userList = new ArrayList<>();
         Node usersNode = document.getFirstChild();
         NodeList usersChild = usersNode.getChildNodes();
@@ -86,7 +85,7 @@ public class ParserXMLToJSONMethodDOM {
         return userList;
     }
 
-    private static User creatingUserFromData(Node userNode){
+    private static User creatingUserFromData(Node userNode) {
         NodeList userChild = userNode.getChildNodes();
 
         User user = new User();
@@ -160,7 +159,7 @@ public class ParserXMLToJSONMethodDOM {
         return user;
     }
 
-    private static void creatingJSONFile(Users users, String path){
+    private static void creatingJSONFile(Users users, String path) {
         JSONObject JSONObjectUsers = new JSONObject();
         JSONArray JSONOArray = new JSONArray();
 
@@ -169,50 +168,50 @@ public class ParserXMLToJSONMethodDOM {
 
             User user = users.getUserList().get(i);
             JSONObject JSONObjectInfoUser = new JSONObject();
-            if(user.getFirstName() != null){
+            if (user.getFirstName() != null) {
                 JSONObjectInfoUser.put(TAG_FIRST_NAME, user.getFirstName());
             }
-            if(user.getLastName() != null){
+            if (user.getLastName() != null) {
                 JSONObjectInfoUser.put(TAG_LAST_NAME, user.getLastName());
             }
-            if(user.getMiddleName() != null){
+            if (user.getMiddleName() != null) {
                 JSONObjectInfoUser.put(TAG_MIDDLE_NAME, user.getMiddleName());
             }
-            if(user.getInn() != null){
+            if (user.getInn() != null) {
                 JSONObjectInfoUser.put(TAG_INN, user.getInn());
             }
-            if(user.getSnils() != null){
+            if (user.getSnils() != null) {
                 JSONObjectInfoUser.put(TAG_SNILS, user.getSnils());
             }
-            if(user.getBirthday() != null){
+            if (user.getBirthday() != null) {
                 SimpleDateFormat format = new SimpleDateFormat(DATA_FORMAT);
                 String data = format.format(user.getBirthday());
                 JSONObjectInfoUser.put(TAG_BIRTHDAY, data);
             }
-            if(user.getLogin() != null){
+            if (user.getLogin() != null) {
                 JSONObjectInfoUser.put(TAG_LOGIN, user.getLogin());
             }
-            if(user.getEmail() != null){
+            if (user.getEmail() != null) {
                 JSONObjectInfoUser.put(TAG_EMAIL, user.getEmail());
             }
 
             JSONArray JSONOArrayOrganizations = new JSONArray();
             for (int j = 0; j < user.getOrganizationList().size(); j++) {
                 JSONObject JSONObjectOrganization = new JSONObject();
-                if(user.getOrganizationList().get(j).getInn() != null){
+                if (user.getOrganizationList().get(j).getInn() != null) {
                     JSONObjectOrganization.put(TAG_INN, user.getOrganizationList().get(j).getInn());
                 }
-                if(user.getOrganizationList().get(j).getKpp() != null){
+                if (user.getOrganizationList().get(j).getKpp() != null) {
                     JSONObjectOrganization.put(TAG_KPP, user.getOrganizationList().get(j).getKpp());
                 }
 
                 JSONOArrayOrganizations.add(JSONObjectOrganization);
             }
 
-            if(!JSONObjectInfoUser.isEmpty()){
+            if (!JSONObjectInfoUser.isEmpty()) {
                 JSONObjectUser.put(TAG_USER, JSONObjectInfoUser);
             }
-            if (!JSONOArrayOrganizations.isEmpty()){
+            if (!JSONOArrayOrganizations.isEmpty()) {
                 JSONObjectInfoUser.put(TAG_ORGANIZATIONS, JSONOArrayOrganizations);
             }
 
@@ -244,14 +243,14 @@ public class ParserXMLToJSONMethodDOM {
 
     }
 
-    private static boolean checkValidation(Document document) {
+    private static boolean checkValidation(String path) {
         SchemaFactory factory = SchemaFactory.newDefaultInstance();
         Source schemaFile = new StreamSource(new File("xsd-schema/users.xsd"));
         Source schemaFile1 = new StreamSource(new File("xsd-schema/types.xsd"));
         try {
             Schema schema = factory.newSchema(new Source[]{schemaFile, schemaFile1});
             Validator validator = schema.newValidator();
-            validator.validate(new DOMSource(document));
+            validator.validate(new StreamSource(new File(path)));
             return true;
         } catch (Exception ex) {
             ex.printStackTrace();
