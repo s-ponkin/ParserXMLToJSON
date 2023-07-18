@@ -3,7 +3,6 @@ package DOM;
 import DOM.model.Organization;
 import DOM.model.User;
 import DOM.model.Users;
-import org.apache.commons.lang3.StringUtils;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.w3c.dom.Document;
@@ -23,9 +22,12 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ParserXMLToJSONMethodDOM {
 
+	private static final Logger logger = Logger.getLogger(ParserXMLToJSONMethodDOM.class.getName());
 	private static final String TAG_FIRST_NAME = "firstName";
 	private static final String TAG_LAST_NAME = "lastName";
 	private static final String TAG_MIDDLE_NAME = "middleName";
@@ -51,7 +53,7 @@ public class ParserXMLToJSONMethodDOM {
 		try {
 			doc = buildDocument(inputPath);
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.log(Level.WARNING, e.getMessage());
 			return;
 		}
 
@@ -207,7 +209,7 @@ public class ParserXMLToJSONMethodDOM {
 			fileWriter.flush();
 			fileWriter.close();
 		} catch (IOException e) {
-			e.printStackTrace();
+			logger.log(Level.WARNING, e.getMessage());
 		}
 	}
 
@@ -227,7 +229,7 @@ public class ParserXMLToJSONMethodDOM {
 			validator.validate(new StreamSource(new File(path)));
 			return true;
 		} catch (Exception ex) {
-			ex.printStackTrace();
+			logger.log(Level.WARNING, ex.getMessage());
 			return false;
 		}
 	}

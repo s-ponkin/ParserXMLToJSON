@@ -31,7 +31,7 @@ public class SAXParserHandler extends DefaultHandler {
 
 	private static final String TAG_POSITION_NAME = "positionName";
 
-	private Users users = new Users();
+	private final Users users = new Users();
 
 	private User user;
 

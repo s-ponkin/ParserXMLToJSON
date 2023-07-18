@@ -2,7 +2,6 @@ package SAX;
 
 import SAX.model.User;
 import SAX.model.Users;
-import org.apache.commons.lang3.StringUtils;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.xml.sax.SAXException;
@@ -17,8 +16,12 @@ import javax.xml.validation.Validator;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ParserXMLToJSONMethodSAX {
+
+	private static final Logger logger = Logger.getLogger(ParserXMLToJSONMethodSAX.class.getName());
 
 	private static final String TAG_USER = "user";
 
@@ -64,7 +67,7 @@ public class ParserXMLToJSONMethodSAX {
 		try {
 			parser = factory.newSAXParser();
 		} catch (Exception e) {
-			System.out.println("Open sax parser error " + e);
+			logger.log(Level.INFO, "Open sax parser error " + e.getMessage());
 			return null;
 		}
 
@@ -72,9 +75,9 @@ public class ParserXMLToJSONMethodSAX {
 		try {
 			parser.parse(file, handler);
 		} catch (SAXException e) {
-			System.out.println("Sax parsing error " + e);
+			logger.log(Level.INFO, "Sax parsing error " + e.getMessage());
 		} catch (IOException e) {
-			System.out.println("IO parsing error " + e);
+			logger.log(Level.INFO, "IO parsing error " + e.getMessage());
 		}
 		return handler.getUsers();
 	}
@@ -129,7 +132,7 @@ public class ParserXMLToJSONMethodSAX {
 			fileWriter.flush();
 			fileWriter.close();
 		} catch (IOException e) {
-			e.printStackTrace();
+			logger.log(Level.WARNING, e.getMessage());
 		}
 	}
 
@@ -143,7 +146,7 @@ public class ParserXMLToJSONMethodSAX {
 			validator.validate(new StreamSource(new File(path)));
 			return true;
 		} catch (Exception ex) {
-			ex.printStackTrace();
+			logger.log(Level.WARNING, ex.getMessage());
 			return false;
 		}
 	}

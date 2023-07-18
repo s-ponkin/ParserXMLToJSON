@@ -19,8 +19,12 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ParserXMLToJSONMethodJACKSON {
+
+	private static final Logger logger = Logger.getLogger(ParserXMLToJSONMethodJACKSON.class.getName());
 
 	/**
 	 * Метод конвертирует файл формата XML в формат JSON методом JACKSON.
@@ -41,6 +45,7 @@ public class ParserXMLToJSONMethodJACKSON {
 		try {
 			stringUtils = StringUtils.toEncodedString(Files.readAllBytes(Paths.get(inputPath)), StandardCharsets.UTF_8);
 		} catch (IOException e) {
+			logger.log(Level.WARNING, e.getMessage());
 			throw new RuntimeException(e);
 		}
 		try {
@@ -50,7 +55,7 @@ public class ParserXMLToJSONMethodJACKSON {
 			ObjectWriter objectWriter = new ObjectMapper().writer().with(defaultPrettyPrinter);
 			jsonObject = objectWriter.writeValueAsString(userProfiles);
 		} catch (IOException e) {
-			e.printStackTrace();
+			logger.log(Level.WARNING, e.getMessage());
 		}
 
 		if (jsonObject == null) {
@@ -65,7 +70,7 @@ public class ParserXMLToJSONMethodJACKSON {
 			fileWriter.flush();
 			fileWriter.close();
 		} catch (IOException e) {
-			e.printStackTrace();
+			logger.log(Level.WARNING, e.getMessage());
 		}
 	}
 
@@ -79,7 +84,7 @@ public class ParserXMLToJSONMethodJACKSON {
 			validator.validate(new StreamSource(new File(path)));
 			return true;
 		} catch (Exception ex) {
-			ex.printStackTrace();
+			logger.log(Level.WARNING, ex.getMessage());
 			return false;
 		}
 	}
