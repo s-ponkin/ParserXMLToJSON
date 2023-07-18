@@ -1,20 +1,11 @@
 package DOM.model;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
-@Getter
-@Setter
+@Data
 public class Organization {
 
-    private String inn;
-    private String kpp;
+	private String inn;
 
-    @Override
-    public String toString() {
-        return "Organization{" +
-                "inn=" + inn +
-                ", kpp='" + kpp + '\'' +
-                '}';
-    }
+	private String kpp;
 }

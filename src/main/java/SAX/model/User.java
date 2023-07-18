@@ -1,23 +1,14 @@
 package SAX.model;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Getter
-@Setter
+@Data
 public class User {
 
-    private String uuid;
-    private List<UserProfile> userProfileList = new ArrayList<>();
+	private String uuid;
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "uuid='" + uuid + '\'' +
-                ", userList=" + userProfileList +
-                '}';
-    }
+	private List<UserProfile> userProfileList = new ArrayList<>();
 }

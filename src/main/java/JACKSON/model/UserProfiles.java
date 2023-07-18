@@ -5,30 +5,22 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Getter
-@Setter
+@Data
 @JacksonXmlRootElement(localName = "userProfiles")
 @JsonIgnoreProperties(ignoreUnknown = true)
 public final class UserProfiles {
-    @JsonInclude(JsonInclude.Include.NON_NULL)
-    @JacksonXmlProperty(localName = "userProfile")
-    @JacksonXmlElementWrapper(useWrapping = false)
-    private List<UserProfile> userProfiles = new ArrayList<>();
 
-    public UserProfiles() {
-        super();
-    }
+	@JsonInclude(JsonInclude.Include.NON_NULL)
+	@JacksonXmlProperty(localName = "userProfile")
+	@JacksonXmlElementWrapper(useWrapping = false)
+	private List<UserProfile> userProfiles = new ArrayList<>();
 
-    @Override
-    public String toString() {
-        return "UserProfiles{" +
-                "userProfileList=" + userProfiles +
-                '}';
-    }
+	public UserProfiles() {
+		super();
+	}
 }

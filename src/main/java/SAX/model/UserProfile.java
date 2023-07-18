@@ -1,26 +1,17 @@
 package SAX.model;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
-@Getter
-@Setter
+@Data
 public class UserProfile {
 
-    private String organizationInn;
-    private String organizationKpp;
-    private String workEmail;
-    private String departmentName;
-    private String positionName;
+	private String organizationInn;
 
-    @Override
-    public String toString() {
-        return "UserProfile{" +
-                "organizationInn='" + organizationInn + '\'' +
-                ", organizationKpp='" + organizationKpp + '\'' +
-                ", workEmail='" + workEmail + '\'' +
-                ", departmentName='" + departmentName + '\'' +
-                ", positionName='" + positionName + '\'' +
-                '}';
-    }
+	private String organizationKpp;
+
+	private String workEmail;
+
+	private String departmentName;
+
+	private String positionName;
 }

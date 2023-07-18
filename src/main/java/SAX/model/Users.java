@@ -1,21 +1,12 @@
 package SAX.model;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Getter
-@Setter
+@Data
 public class Users {
 
-    private List<User> userList = new ArrayList<>();
-
-    @Override
-    public String toString() {
-        return "Users{" +
-                "userList=" + userList +
-                '}';
-    }
+	private List<User> userList = new ArrayList<>();
 }

@@ -6,9 +6,7 @@
         <userProfiles>
             <userProfile>
                 <organizationInn>3557421744</organizationInn>
-                <organizationKpp>
-                    043401207
-                </organizationKpp>
+                <organizationKpp>043401207</organizationKpp>
                 <workEmail>email.from.file@work.com</workEmail>
                 <departmentName>Отдел</departmentName>
                 <positionName>Должность</positionName>

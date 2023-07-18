@@ -7,7 +7,7 @@
           "techName" : "not_xidbox",
           "rolesToAdd" : [
             {
-              "roleTechName" : "information_system_manager",
+              "techName" : "information_system_manager",
               "startDate" : "2023-01-01T09:30:10Z",
               "endDate" : "2023-12-01T10:31:09Z",
               "controlledInfoSystemTechName" : "xidbox"
@@ -15,7 +15,7 @@
           ],
           "rolesToDelete" : [
             {
-              "roleTechName" : "system_administrator"
+              "techName" : "system_administrator"
             }
           ]
         }
@@ -28,13 +28,13 @@
           "techName" : "xidbox_external_is",
           "rolesToAdd" : [
             {
-              "roleTechName" : "account_manager",
+              "techName" : "account_manager",
               "startDate" : "2021-01-01T09:30:10Z"
             }
           ],
           "rolesToDelete" : [
             {
-              "roleTechName" : "system_administrator"
+              "techName" : "system_administrator"
             }
           ]
         }
