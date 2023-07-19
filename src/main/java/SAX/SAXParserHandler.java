@@ -12,23 +12,14 @@ import java.util.List;
 public class SAXParserHandler extends DefaultHandler {
 
 	private static final String TAG_USER = "user";
-
 	private static final String TAG_USERS = "users";
-
 	private static final String TAG_UUID = "uuid";
-
 	private static final String TAG_USER_PROFILES = "userProfiles";
-
 	private static final String TAG_USER_PROFILE = "userProfile";
-
 	private static final String TAG_ORGANIZATIONS_INN = "organizationInn";
-
 	private static final String TAG_ORGANIZATIONS_KPP = "organizationKpp";
-
 	private static final String TAG_WORK_EMAIL = "workEmail";
-
 	private static final String TAG_DEPARTMENT_NAME = "departmentName";
-
 	private static final String TAG_POSITION_NAME = "positionName";
 
 	private final Users users = new Users();

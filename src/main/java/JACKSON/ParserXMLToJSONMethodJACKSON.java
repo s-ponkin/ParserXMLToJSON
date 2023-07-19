@@ -33,7 +33,6 @@ public class ParserXMLToJSONMethodJACKSON {
 	 * @param outputPath путь к файлу формата JSON.
 	 */
 	public static void parseXMLToJSON(String inputPath, String outputPath) {
-
 		if (!checkValidation(inputPath)) {
 			System.out.println("Validity error.");
 		}
@@ -76,10 +75,10 @@ public class ParserXMLToJSONMethodJACKSON {
 
 	private static boolean checkValidation(String path) {
 		SchemaFactory factory = SchemaFactory.newDefaultInstance();
-		Source schemaFile = new StreamSource(new File("xsd-schema/user_profile_roles.xsd"));
-		Source schemaFile1 = new StreamSource(new File("xsd-schema/types.xsd"));
+		Source userProfileRolesSchemaFile = new StreamSource(new File("xsd-schema/user_profile_roles.xsd"));
+		Source typesSchemaFile = new StreamSource(new File("xsd-schema/types.xsd"));
 		try {
-			Schema schema = factory.newSchema(new Source[] {schemaFile, schemaFile1});
+			Schema schema = factory.newSchema(new Source[] {userProfileRolesSchemaFile, typesSchemaFile});
 			Validator validator = schema.newValidator();
 			validator.validate(new StreamSource(new File(path)));
 			return true;

@@ -24,21 +24,13 @@ public class ParserXMLToJSONMethodSAX {
 	private static final Logger logger = Logger.getLogger(ParserXMLToJSONMethodSAX.class.getName());
 
 	private static final String TAG_USER = "user";
-
 	private static final String TAG_USERS = "users";
-
 	private static final String TAG_UUID = "uuid";
-
 	private static final String TAG_USER_PROFILES = "userProfiles";
-
 	private static final String TAG_INN = "inn";
-
 	private static final String TAG_KPP = "kpp";
-
 	private static final String TAG_EMAIL = "email";
-
 	private static final String TAG_DEPARTMENT_NAME = "departmentName";
-
 	private static final String TAG_POSITION_NAME = "positionName";
 
 	/**
@@ -48,7 +40,6 @@ public class ParserXMLToJSONMethodSAX {
 	 * @param outputPath путь к файлу формата JSON.
 	 */
 	public static void parseXMLToJSON(String inputPath, String outputPath) {
-
 		if (!checkValidation(inputPath)) {
 			System.out.println("Validity error.");
 		}
@@ -138,10 +129,10 @@ public class ParserXMLToJSONMethodSAX {
 
 	private static boolean checkValidation(String path) {
 		SchemaFactory factory = SchemaFactory.newDefaultInstance();
-		Source schemaFile = new StreamSource(new File("xsd-schema/user_profiles.xsd"));
-		Source schemaFile1 = new StreamSource(new File("xsd-schema/types.xsd"));
+		Source userProfilesSchemaFile = new StreamSource(new File("xsd-schema/user_profiles.xsd"));
+		Source typesSchemaFile = new StreamSource(new File("xsd-schema/types.xsd"));
 		try {
-			Schema schema = factory.newSchema(new Source[] {schemaFile, schemaFile1});
+			Schema schema = factory.newSchema(new Source[] {userProfilesSchemaFile, typesSchemaFile});
 			Validator validator = schema.newValidator();
 			validator.validate(new StreamSource(new File(path)));
 			return true;
